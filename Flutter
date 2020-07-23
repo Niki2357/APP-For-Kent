@@ -1,0 +1,106 @@
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(new MaterialApp(
+      home: Home (),
+    ));
+
+// lost and found的class从这里开始
+class LostAndFound extends StatefulWidget {
+  @override
+  _LostAndFoundState createState() => _LostAndFoundState();
+}
+
+class _LostAndFoundState extends State<LostAndFound> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(20, 53, 84, 1),
+        title: Text("LOST AND FOUND")),
+    );
+  }
+
+}
+
+// lost and found的class从这里结束
+
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+
+  
+  int _currentIndex = 0;
+
+  final tabs = [
+    Center(child: Text("Home"),),
+    Center(child: Text("Explore"),),
+    Center(child: Text("Lost & Found"),),
+    Center(child: Text("Home"),),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Kent APP"),
+      ),
+      body: tabs[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: Color.fromRGBO(20, 53, 84, 1),
+        unselectedItemColor: Color.fromRGBO(202, 200, 199, 1),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Color.fromRGBO(20, 53, 84, 1),
+                size: 24.0,),
+              title: Text("HOME"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.explore,
+                color: Color.fromRGBO(20, 53, 84, 1),
+                size: 24.0,),
+              title: Text("EXPLORE"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.remove_red_eye,
+                color: Color.fromRGBO(20, 53, 84, 1),
+                size: 24.0,),
+              title: Text("LOST/FOUND"),
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle,
+                color: Color.fromRGBO(20, 53, 84, 1),
+                size: 24.0,),
+              title: Text("MINE"),
+            ),
+          ],
+          onTap: (index) {
+            setState((){
+              _currentIndex = index;
+            });
+          }
+        ),  
+    );
+
+
+  
+}
