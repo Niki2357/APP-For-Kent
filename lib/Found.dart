@@ -1,17 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:my_app/widgets.dart';
-
+import 'Found_Detail.dart';
 import 'utils.dart';
 
+double _sigmaX = 5; // from 0-10
+double _sigmaY = 3; // from 0-10
+double _opacity = 0.1;
 
 class FoundTab extends StatefulWidget {
-  static const title = 'News';
-  static const androidIcon = Icon(Icons.library_books);
-  static const iosIcon = Icon(CupertinoIcons.news);
-
   @override
   _FoundTabState createState() => _FoundTabState();
 }
@@ -23,12 +23,16 @@ class _FoundTabState extends State<FoundTab> {
   List<String> titles;
   List<String> contents;
 
+  get random => null;
+
   @override
   void initState() {
     colors = getRandomColors(_itemsLength);
     titles = List.generate(_itemsLength, (index) => generateRandomHeadline());
     contents =
-        List.generate(_itemsLength, (index) => lorem(paragraphs: 1, words: 24));
+        List.generate(_itemsLength, (index) => lorem(paragraphs: 1, words: 5));
+    contents =
+        List.generate(_itemsLength, (index) => lorem(paragraphs: 1, words: 5));
     super.initState();
   }
 
@@ -40,33 +44,48 @@ class _FoundTabState extends State<FoundTab> {
       bottom: false,
       child: Card(
         elevation: 1.5,
-        margin: EdgeInsets.fromLTRB(6, 12, 6, 0),
+        margin: EdgeInsets.fromLTRB(15, 12, 15, 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
         ),
         child: InkWell(
-          // Make it splash on Android. It would happen automatically if this
-          // was a real card but this is just a demo. Skip the splash on iOS.
-          onTap: defaultTargetPlatform == TargetPlatform.iOS ? null : () {},
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Found_Detail()));
+          },
           child: Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Row(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundColor: colors[index],
-                  child: Text(
-                    titles[index].substring(0, 1),
-                    style: TextStyle(color: Colors.white),
+                Container(
+                  width: 600,
+                  height: 240,
+                  child: Container(
+                    child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+                    child: Container(
+                      color: Colors.black.withOpacity(_opacity),
+                    ),
                   ),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/images/pic2.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  )
                 ),
                 Padding(padding: EdgeInsets.only(left: 16)),
-                Expanded(
+                Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 20),
                       Text(
-                        titles[index],
+                        "Name: " + titles[index],
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -74,7 +93,10 @@ class _FoundTabState extends State<FoundTab> {
                       ),
                       Padding(padding: EdgeInsets.only(top: 8)),
                       Text(
-                        contents[index],
+                        "Found on " + contents[index],
+                      ),
+                      Text(
+                        "Found at " + contents[index],
                       ),
                     ],
                   ),
@@ -94,7 +116,7 @@ class _FoundTabState extends State<FoundTab> {
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(FoundTab.title),
+        title: Text("Found"),
       ),
       body: Container(
         child: ListView.builder(

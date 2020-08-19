@@ -3,8 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
+import 'Lost_Found.dart';
 import 'utils.dart';
 import 'widgets.dart';
+
+
+
+
 
 class NewsTab extends StatefulWidget {
   static const title = 'News';
@@ -21,6 +26,8 @@ class _NewsTabState extends State<NewsTab> {
   List<Color> colors;
   List<String> titles;
   List<String> contents;
+
+ 
 
   @override
   void initState() {
@@ -41,7 +48,7 @@ class _NewsTabState extends State<NewsTab> {
         elevation: 1.5,
         margin: EdgeInsets.fromLTRB(6, 12, 6, 0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(1),
         ),
         child: InkWell(
           // Make it splash on Android. It would happen automatically if this
@@ -85,7 +92,7 @@ class _NewsTabState extends State<NewsTab> {
       ),
     );
   }
-
+  
   // ===========================================================================
   // Non-shared code below because this tab uses different scaffolds.
   // ===========================================================================

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:my_app/widgets.dart';
-
+import 'Lost_Detail.dart';
 import 'utils.dart';
 
 class LostTab extends StatefulWidget {
@@ -34,6 +34,7 @@ class _LostTabState extends State<LostTab> {
     if (index >= _itemsLength) return null;
 
     return SafeArea(
+      
       top: false,
       bottom: false,
       child: Card(
@@ -43,23 +44,24 @@ class _LostTabState extends State<LostTab> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: InkWell(
-          // Make it splash on Android. It would happen automatically if this
-          // was a real card but this is just a demo. Skip the splash on iOS.
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Lost_Detail()));
+          },
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child:Image.asset('assets/images/pic2.jpg',
-                  width: 300, height: 150, fit: BoxFit.fill),
+                  child: Image.asset('assets/images/pic2.jpg',
+                      width: 300, height: 150, fit: BoxFit.fill),
                 ),
                 Padding(padding: EdgeInsets.only(left: 16)),
                 Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox (height: 20),
+                      SizedBox(height: 20),
                       Text(
                         "Name: " + titles[index],
                         style: TextStyle(

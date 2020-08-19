@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'Explore.dart';
 import 'Lost_Found.dart';
 import 'Mine.dart';
+import 'Post_Lost.dart';
 import 'settings_tab.dart';
 import 'Home.dart';
 import 'widgets.dart';
@@ -125,7 +126,7 @@ class _PlatformAdaptingHomePageState extends State<PlatformAdaptingHomePage> {
           case 1:
             return CupertinoTabView(
               defaultTitle: NewsTab.title,
-              builder: (context) => NewsTab(),
+              builder: (context) => Post_Lost(),
             );
           case 2:
             return CupertinoTabView(
