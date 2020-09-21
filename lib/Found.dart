@@ -59,25 +59,25 @@ class _FoundTabState extends State<FoundTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 600,
-                  height: 240,
-                  child: Container(
-                    child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+                    width: 600,
+                    height: 240,
                     child: Container(
-                      color: Colors.black.withOpacity(_opacity),
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/pic2.jpg',
+                      child: BackdropFilter(
+                        filter:
+                            ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+                        child: Container(
+                          color: Colors.black.withOpacity(_opacity),
+                        ),
                       ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  )
-                ),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                            'assets/images/pic2.jpg',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )),
                 Padding(padding: EdgeInsets.only(left: 16)),
                 Center(
                   child: Column(

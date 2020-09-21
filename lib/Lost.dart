@@ -92,25 +92,21 @@ class _LostTabState extends State<LostTab> {
   // ===========================================================================
 
   Widget _buildAndroid(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Lost"),
-      ),
-      body: Container(
-        child: ListView.builder(
+    return ListView.builder(
           itemBuilder: _listBuilder,
-        ),
-      ),
-    );
+      );
   }
 
   Widget _buildIos(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(),
-      child: ListView.builder(
-        itemBuilder: _listBuilder,
-      ),
-    );
+    // return CupertinoPageScaffold(
+    //   navigationBar: CupertinoNavigationBar(),
+    //   child: ListView.builder(
+    //     itemBuilder: _listBuilder,
+    //   ),f
+    // );
+        return ListView.builder(
+          itemBuilder: _listBuilder,
+      );
   }
 
   @override

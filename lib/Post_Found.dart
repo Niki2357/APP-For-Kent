@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'Lost_Found.dart';
 
-class Post_Lost extends StatefulWidget {
+class Post_Found extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return Post_LostState();
+    return Post_FoundState();
   }
 
   // @override
   // _Lost_DetailState createState() => _Lost_DetailState();
 }
 
-class Post_LostState extends State<Post_Lost> {
+class Post_FoundState extends State<Post_Found> {
   DateTime selectedDate = DateTime.now();
   DateTime pickedDate;
   TimeOfDay time;
@@ -40,7 +40,7 @@ class Post_LostState extends State<Post_Lost> {
       });
   }
 
-  @override
+  var flag = false;
   void initState() {
     super.initState();
     pickedDate = DateTime.now();
@@ -48,17 +48,13 @@ class Post_LostState extends State<Post_Lost> {
   }
 
   Widget build(BuildContext context) {
-    Widget pictureSection = Stack(
-      children: <Widget>[
-        Container(
-          child: Image.asset(
-            'assets/images/pic2.jpg',
-            width: 600,
-            height: 240,
-            fit: BoxFit.cover,
-          ),
-        ),
-      ],
+    Widget pictureSection = Container(
+      child: Image.asset(
+        'assets/images/pic2.jpg',
+        width: 600,
+        height: 240,
+        fit: BoxFit.cover,
+      ),
     );
 
     Widget inputSection1 = Container(
@@ -84,7 +80,7 @@ class Post_LostState extends State<Post_Lost> {
           children: <Widget>[
             ListTile(
               title: Text(
-                "Date of Loss: ${pickedDate.year},${pickedDate.month},${pickedDate.day}",
+                "Date of Found: ${pickedDate.year},${pickedDate.month},${pickedDate.day}",
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
@@ -92,7 +88,7 @@ class Post_LostState extends State<Post_Lost> {
             ),
             ListTile(
               title: Text(
-                "Time of Loss: ${time.hour}:${time.minute}",
+                "Time of Found: ${time.hour}:${time.minute}",
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
@@ -107,7 +103,7 @@ class Post_LostState extends State<Post_Lost> {
           padding: const EdgeInsets.only(top: 15, left: 32, right: 32),
           alignment: Alignment.centerLeft,
           child: Text(
-            "Where was it lost:",
+            "Where was it found:",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
@@ -132,6 +128,25 @@ class Post_LostState extends State<Post_Lost> {
       ],
     );
 
+    Widget checkBox = Container(
+        padding: EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 100),
+        child: CheckboxListTile(
+          value: this.flag,
+          title: Text(
+            "I've put it in the Rad House.",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          // subtitle: Text("这是二级标题"),
+          // secondary: Icon(Icons.headset_mic),
+          selected: this.flag,
+          activeColor: Color.fromRGBO(20, 53, 84, 1),
+          onChanged: (value) {
+            setState(() {
+              this.flag = value;
+            });
+          },
+        ));
+
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
@@ -145,6 +160,7 @@ class Post_LostState extends State<Post_Lost> {
             inputSection1,
             dateTimePicker,
             inputSection2,
+            checkBox,
           ],
         ),
         Positioned(

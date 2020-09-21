@@ -22,46 +22,25 @@ class Found_Detail extends StatefulWidget {
 class _Found_DetailState extends State<Found_Detail> {
   @override
   Widget build(BuildContext context) {
-    Widget pictureSection = Stack(
-      children: <Widget>[
-        Container(
-          width: 600,
-          height: 240,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/pic2.jpg',
-              ),
-              fit: BoxFit.cover,
-            ),
+    Widget pictureSection = Container(
+      width: 600,
+      height: 240,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/pic2.jpg',
           ),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
-            child: Container(
-              color: Colors.black.withOpacity(_opacity),
-            ),
-          ),
+          fit: BoxFit.cover,
         ),
-        // Container(
-        //   child: Image.asset(
-        //     ,
-
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        Positioned(
-            left: 20.0,
-            top: 20.0,
-            child: (FloatingActionButton(
-                heroTag: FloatingActionButtonLocation.centerDocked,
-                child: Icon(Icons.arrow_back),
-                backgroundColor: Color.fromRGBO(20, 53, 84, 1),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LFTabs()));
-                })))
-      ],
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: _sigmaX, sigmaY: _sigmaY),
+        child: Container(
+          color: Colors.black.withOpacity(_opacity),
+        ),
+      ),
     );
+
     Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
@@ -93,13 +72,7 @@ class _Found_DetailState extends State<Found_Detail> {
     );
 
     Widget textSection = Container(
-      // decoration: BoxDecoration(
-      //   border: Border(top: BorderSide (color: Colors.grey, width: 1.0)
-      //   )
-
-      // ),
       padding: (EdgeInsets.only(left: 30, top: 0, right: 30, bottom: 30)),
-
       child: Text(
         lorem(paragraphs: 1, words: 50),
         softWrap: true,
@@ -107,20 +80,47 @@ class _Found_DetailState extends State<Found_Detail> {
       ),
     );
 
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text('Flutter layout demo'),
-        // ),
-        body: ListView(
-          children: [
-            pictureSection,
-            titleSection,
-            textSection,
-          ],
-        ),
+    return Stack(children: [
+      ListView(
+        children: [
+          pictureSection,
+          titleSection,
+          textSection,
+        ],
       ),
-    );
+      Positioned(
+          left: 20.0,
+          top: 50.0,
+          child: (FloatingActionButton(
+              heroTag: FloatingActionButtonLocation.centerDocked,
+              child: Icon(Icons.arrow_back),
+              backgroundColor: Color.fromRGBO(20, 53, 84, 1),
+              onPressed: () {
+                Navigator.pop(
+                    context, MaterialPageRoute(builder: (context) => LFTabs()));
+              }))),
+      Positioned(
+        left: 10,
+        bottom: -10,
+        child: Container(
+            width: 400,
+            padding:
+                const EdgeInsets.only(top: 35, left: 32, right: 32, bottom: 90),
+            child: RaisedButton(
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+                padding:
+                    EdgeInsets.only(top: 10, left: 32, right: 32, bottom: 10),
+                color: Color.fromRGBO(20, 53, 84, 1),
+                child: Text("I found it!",
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    )))),
+      )
+    ]);
   }
 }
